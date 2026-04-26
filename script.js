@@ -7,24 +7,23 @@ const sortIcon = document.getElementById('sort-icon');
 
 // 1 Объект с путями к картинкам (иконки)
 const PATHS = {
-    editGray: 'pic/edit-gray.png',
-    editPurple: 'pic/edit-purple.png',
-    deleteGray: 'pic/delete-gray.png',
-    deletePurple: 'pic/delete-purple.png',
-    plusGray: 'pic/plus-gray.png',
-    plusPurple: 'pic/plus-purple.png',
-    sortDownGray: 'pic/down-gray.png',
-    sortDown: 'pic/down.png',
-    sortUpGray: 'pic/up-gray.png',
-    sortUp: 'pic/up.png',
-    addIcon: 'pic/add.png',
-    addPurple: 'pic/add-violet1.png'
+    editGray: '../pic/edit-gray.png',
+    editPurple: '../pic/edit-purple.png',
+    deleteGray: '../pic/delete-gray.png',
+    deletePurple: '../pic/delete-purple.png',
+    plusGray: '../pic/plus-gray.png',
+    plusPurple: '../pic/plus-purple.png',
+    sortDownGray: '../pic/down-gray.png',
+    sortDown: '../pic/down.png',
+    sortUpGray: '../pic/up-gray.png',
+    sortUp: '../pic/up.png',
+    addIcon: '../pic/add.png',
+    addPurple: '../pic/add-violet1.png'
 };
-
 
 //  ФУНКЦИЯ: создаёт строку с input (поле ввода)
 function createInputRow(value = "") {
-
+ 
     const li = document.createElement('li'); 
     // createElement → создаёт новый HTML элемент
 
@@ -225,26 +224,28 @@ function attachRowEvents(row) {
 
 
 // 5 КНОПКА "+" → создаёт новый input
-plusBtn.addEventListener('click', (e) => {
-
-        if (e.target.id === 'plus-btn') {
-        return;}
-    // e.stopPropagation(); 
+ 
     // stopPropagation → останавливает всплытие события
+
+   plusBtn.addEventListener('click', (e) => {
+     e.stopPropagation();
+    //   if (e.target.id === 'plus-btn') {
+    //     return;}
 
     const existing = taskList.querySelector('.task-item.editing');
 
-   if (existing) {
+    if (existing) {
         //  Поле уже существует
         const input = existing.querySelector('.task-input');
         input.focus();
     } else {
         //  Поля нет, создаем новое
         const newRow = createInputRow();
-        taskList.prepend(newRow);}
+        taskList.prepend(newRow);
 
-    const input = newRow.querySelector('.task-input');
-    input.focus();
+        const input = newRow.querySelector('.task-input');
+        input.focus();
+    }
 });
 
 
