@@ -1,0 +1,157 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Roboto", sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 20px;
+}
+
+/* --- Главный контейнер --- */
+.app-container {
+     background: #fff; 
+    width: 400px;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+}
+
+.header {
+    background-color: #e6a23c;
+    height: 40px;
+    width: 100%;
+}
+
+.content {
+    padding: 20px;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    font-weight: 800;
+    text-align: center;
+}
+
+/* Кнопка сортировки  */
+.sort-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 10px;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.icon-btn img {
+    width: 25px; 
+    height: 15px;
+}
+
+/* Список задач  */
+#task-list {
+    list-style: none;
+    margin-bottom: 20px;
+    min-height: 50px;
+    padding: 0;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 15px;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    background: #fff;
+    min-height: 50px;
+}
+
+.task-text {
+    flex-grow: 1;
+    text-align: left;
+    font-size: 16px;
+    color: #333;
+    word-break: break-all; /* Чтобы длинный текст не вылезал */
+}
+
+.task-input {
+    border: none;
+    outline: none;
+    font-size: 16px;
+    padding: 5px;
+}
+
+
+
+/* Кнопка Add  */
+.footer {
+    display: flex;
+    justify-content: center;
+}
+
+.add-btn {
+    background-color: #8a3ffc;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 25px;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.add-btn:hover {
+    background-color: #6929c4;
+}
+
+
+
+.plus-icon {
+        background-color: #9d5ff4;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+
+
+
+#task-list {
+    counter-reset: task-counter; /* Сбрасываем счетчик для всего списка */
+}
+
+/* Считаем ТОЛЬКО сохраненные задачи (у которых НЕТ класса .editing) */
+.task-item:not(.editing) {
+    counter-increment: task-counter; 
+}
+
+/* Показываем номер ТОЛЬКО для сохраненных задач */
+.task-item:not(.editing)::before {
+    content: counter(task-counter) ". ";
+    font-weight: bold;
+    margin-right: 8px;
+    color: #333;
+    min-width: 20px;
+}
+
+/* Для строки ввода (инпут) убираем номер полностью */
+.task-item.editing::before {
+    content: none;
+}
