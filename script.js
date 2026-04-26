@@ -7,18 +7,18 @@ const sortIcon = document.getElementById('sort-icon');
 
 // 1 Объект с путями к картинкам (иконки)
 const PATHS = {
-    editGray: './pic/edit-gray.png',
-    editPurple: './pic/edit-purple.png',
-    deleteGray: './pic/delete-gray.png',
-    deletePurple: './pic/delete-purple.png',
-    plusGray: './pic/plus-gray.png',
-    plusPurple: './pic/plus-purple.png',
-    sortDownGray: './pic/down-gray.png',
-    sortDown: './pic/down.png',
-    sortUpGray: './pic/up-gray.png',
-    sortUp: './pic/up.png',
-    addIcon: './pic/add.png',
-    addPurple: './pic/add-violet1.png'
+    editGray: './Pic/edit-gray.png',
+    editPurple: './Pic/edit-purple.png',
+    deleteGray: './Pic/delete-gray.png',
+    deletePurple: './Pic/delete-purple.png',
+    plusGray: './Pic/plus-gray.png',
+    plusPurple: './Pic/plus-purple.png',
+    sortDownGray: './Pic/down-gray.png',
+    sortDown: './Pic/down.png',
+    sortUpGray: './Pic/up-gray.png',
+    sortUp: './Pic/up.png',
+    addIcon: './Pic/add.png',
+    addPurple: './Pic/add-violet.png'
 };
 
 //  ФУНКЦИЯ: создаёт строку с input (поле ввода)
@@ -70,17 +70,17 @@ let isAscending = true;
 
 // 2 обновляет иконку сортировки
 function updateSortIcon(isHover) {
-    if (isAscending) { // если текущий порядок сортировки — по возрастанию
-        if (isHover) {  // если мышь наведена на кнопку
-            sortIcon.src = PATHS.sortDown; // ставим цветную стрелку вниз
-        } else {        // если мышь НЕ наведена
-            sortIcon.src = PATHS.sortDownGray; // ставим серую стрелку вниз
+    if (isAscending) { //  по возрастанию вниз
+        if (isHover) {  
+            sortIcon.src = PATHS.sortDown; 
+        } else {        
+            sortIcon.src = PATHS.sortDownGray; 
         }
-    } else {            // если текущий порядок сортировки — по убыванию
-        if (isHover) {  // если мышь наведена
-            sortIcon.src = PATHS.sortUp; // ставим цветную стрелку вверх
-        } else {        // если мышь НЕ наведена
-            sortIcon.src = PATHS.sortUpGray; // ставим серую стрелку вверх
+    } else {            // по убыванию вверх
+        if (isHover) { 
+            sortIcon.src = PATHS.sortUp; 
+        } else {       
+            sortIcon.src = PATHS.sortUpGray; 
         }
     }
 } 
@@ -100,38 +100,30 @@ function sortTasks() {
     var textB = b.querySelector('.task-text').innerText.toLowerCase();
 
     if (isAscending) {
-        if (textA < textB) return -1; // textA идёт перед textB
-        if (textA > textB) return 1;  // textA идёт после textB
-        return 0;                     // они равны
+        if (textA < textB) return -1; 
+        if (textA > textB) return 1;  
+        return 0;                     
     } else {
-        if (textA > textB) return -1; // по убыванию: textA идёт раньше textB
-        if (textA < textB) return 1;  // textA идёт после textB
-        return 0;                     // они равны
+        if (textA > textB) return -1; 
+        if (textA < textB) return 1;  
+        return 0;                     
     }
 });
+}
 
     // Находим строку ввода, если она есть
 const editingRow = taskList.querySelector('.task-item.editing');
 
 taskList.innerHTML = ''; // очищаем список
 
-if (editingRow) {
-    taskList.prependChild(editingRow);
-}
 
-for (let i = 0; i < items.length; i++) {
-    taskList.appendChild(items[i]);
-}
-    // Обновляем иконку сортировки
-    updateSortIcon(true);
-}
 
-// if (editingRow) {
-//     taskList.appendChild(editingRow); // вставляем в конец
-// }
-// for (let i = 0; i < items.length; i++) {
-//     taskList.appendChild(items[i]); // остальные задачи после неё
-// }
+ if (editingRow) {
+     taskList.appendChild(editingRow); // вставляем в конец
+ }
+ for (let i = 0; i < items.length; i++) {
+     taskList.appendChild(items[i]); // остальные задачи после неё
+     }
 
 
 
@@ -149,11 +141,11 @@ function attachRowEvents(row) {
 
     deleteImg.addEventListener('click', () => {
         row.remove(); 
-        // remove → удаляет элемент
+        // remove удаляет элемент
 
         if (taskList.children.length === 0) {
             taskList.prepend(createInputRow()); 
-            // prepend → добавляет элемент В НАЧАЛО .Если список стал пустым
+            // prepend добавляет элемент В НАЧАЛО .Если список стал пустым
         }
     });
 
