@@ -182,6 +182,11 @@ function makeEvents(row) {
         confirmImg.src = PATHS.addIcon;
          confirmImg.className = 'edit-icon confirm-edit-icon';
         confirmImg.alt = 'confirm';
+
+
+        // Меняем только иконку Edit на галочку (Delete не трогаем)
+        // editImg.replaceWith(confirmImg); нз надо это или нет??
+
         confirmImg.addEventListener('mouseenter', () => {
             confirmImg.src = PATHS.addPurple;
         });
@@ -215,7 +220,7 @@ function makeEvents(row) {
             newEditImg.src = PATHS.editGray;
             newEditImg.className = 'edit-icon';
             newEditImg.alt = 'edit';
-            confirmImg.replaceWith(newEditImg);
+            confirmImg.replaceWith(newEditImg); // Возвращаем карандаш вместо +
             makeEvents(row);
         }
         confirmImg.addEventListener('click', confirmEdit);
