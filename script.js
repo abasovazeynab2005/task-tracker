@@ -4,8 +4,7 @@ const addBtn = document.getElementById('add-task-btn');
 const sortBtn = document.getElementById('sort-btn');
 const sortIcon = document.getElementById('sort-icon');
 
-
-// 1 Объект с путями к картинкам (иконки)
+  
 const PATHS = {
     editGray: './Pic/edit-gray.png',
     editPurple: './Pic/edit-purple.png',
@@ -21,33 +20,25 @@ const PATHS = {
     addPurple: './Pic/add-violet.png'
 };
 
-//  ФУНКЦИЯ: создаёт строку с input (поле ввода)
-function createInputRow(value = "") {
- 
-    const li = document.createElement('li'); 
-    // createElement → создаёт новый HTML элемент
 
+function createInputRow(value = "") {
+    const li = document.createElement('li'); 
     li.className = 'task-item editing'; 
-    // className → задаём класс элементу
       li.innerHTML = `
         <input type="text" class="task-input" value="${value}">
         <div class="action-icons">
             <img src="${PATHS.deleteGray}" class="delete-icon" alt="delete">
         </div>
     `;        
-    // innerHTML → вставляет HTML внутрь элемента
 
     const input = li.querySelector('.task-input'); 
-    // querySelector → ищет ПЕРВЫЙ элемент внутри li
-
     const deleteImg = li.querySelector('.delete-icon');
 
         // Кнопка удаления
     deleteImg.addEventListener('click', () => {
         input.value = ''; 
-        // value → получить/изменить текст в input
         input.focus(); 
-        // focus → ставит курсор в input
+       
     });
 
     deleteImg.addEventListener('mouseenter', () => { 
@@ -60,11 +51,8 @@ function createInputRow(value = "") {
     });
 
     return li; 
-    // return → возвращает созданный элемент
+
 }
-
-
-//  переменная направления сортировки
 let isAscending = true;
 
 
@@ -85,14 +73,14 @@ function updateSortIcon(isHover) {
     }
 } 
 
-// 3 ФУНКЦИЯ: сортирует задачи
+// 3 сортирует задачи
 function sortTasks() {
-    // Переключаем направление сортировки
+   
     isAscending = !isAscending;
 
     // Находим все завершённые задачи (кроме редактируемой строки)
     const nodeList = taskList.querySelectorAll('.task-item:not(.editing)');
-    const items = [...nodeList] // Превращаем NodeList в массив, чтобы можно было сортировать
+    const items = [...nodeList] 
 
     // Сортируем задачи по тексту
   items.sort(function(a, b) {
@@ -111,9 +99,8 @@ function sortTasks() {
 });
 
     // Находим строку ввода, если она есть
-const editingRow = taskList.querySelector('.task-item.editing');
-
-taskList.innerHTML = ''; // очищаем список
+const editingRow = taskList.querySelector('.task-item.editing');        
+taskList.innerHTML = ''; 
 
 
 
@@ -141,7 +128,7 @@ function attachRowEvents(row) {
 
     deleteImg.addEventListener('click', () => {
         row.remove(); 
-        // remove удаляет элемент
+        
 
         if (taskList.children.length === 0) {
             taskList.prepend(createInputRow()); 
@@ -180,7 +167,6 @@ function attachRowEvents(row) {
 
 
         taskText.replaceWith(input); 
-        // replaceWith → заменяет элемент
         editImg.replaceWith(confirmImg);
         input.focus();
         //на экране текст исчезает, а на его месте появляется
@@ -189,9 +175,7 @@ function attachRowEvents(row) {
 
         function confirmEdit() {
             const newVal = input.value.trim(); 
-            // trim → убирает пробелы
-
-            if (newVal === '') return; //нельзя сохранить пустую задачу.
+            if (newVal === '') return; 
 
             const newSpan = document.createElement('span');
             newSpan.className = 'task-text';
@@ -216,10 +200,7 @@ function attachRowEvents(row) {
 
 
 // 5 КНОПКА "+" → создаёт новый input
- 
-    // stopPropagation → останавливает всплытие события
-
-   plusBtn.addEventListener('click', (e) => {
+    plusBtn.addEventListener('click', (e) => {
      e.stopPropagation();
     //   if (e.target.id === 'plus-btn') {
     //     return;}
@@ -251,9 +232,7 @@ addBtn.addEventListener('click', () => {
     const val = input.value.trim();
 
     if (val === '') return;
-
     currentInputRow.classList.remove('editing'); 
-    // classList.remove → убирает класс
 
     currentInputRow.innerHTML = `
         <span class="task-text">${val}</span>

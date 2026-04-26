@@ -13,7 +13,7 @@ body {
     margin: 20px;
 }
 
-/* --- Главный контейнер --- */
+/* Главный контейнер */
 .app-container {
      background: #fff; 
     width: 400px;
@@ -82,7 +82,7 @@ h1 {
     text-align: left;
     font-size: 16px;
     color: #333;
-    word-break: break-all; /* Чтобы длинный текст не вылезал */
+    word-break: break-all; 
 }
 
 .task-input {
@@ -115,7 +115,6 @@ h1 {
 .add-btn:hover {
     background-color: #6929c4;
 }
-
 
 
 .plus-icon {
