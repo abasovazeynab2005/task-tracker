@@ -106,7 +106,7 @@ h1 {
     border: none;
     border-radius: 25px;
     padding: 10px 25px;
-    display: inline-flex;
+     display: inline-flex;
     align-items: center;
     cursor: pointer;
     font-size: 16px;

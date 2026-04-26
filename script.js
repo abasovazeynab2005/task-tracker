@@ -24,12 +24,14 @@ const PATHS = {
 function createInputRow(value = "") {
     const li = document.createElement('li'); 
     li.className = 'task-item editing'; 
-      li.innerHTML = `
-        <input type="text" class="task-input" value="${value}">
-        <div class="action-icons">
-            <img src="${PATHS.deleteGray}" class="delete-icon" alt="delete">
-        </div>
-    `;        
+      
+    li.innerHTML = 
+    '<input type="text" class="task-input" value="'
+     + value + '">' + '<div class="action-icons">'
+      + '<img src="' + PATHS.deleteGray
+       + '" class="delete-icon">' +
+     '</div>';     
+        
 
     const input = li.querySelector('.task-input'); 
     const deleteImg = li.querySelector('.delete-icon');
