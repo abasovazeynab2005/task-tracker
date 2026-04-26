@@ -116,7 +116,7 @@ taskList.innerHTML = '';
 
 
 
-// 4 ФУНКЦИЯ: добавляет события (edit, delete, hover)
+// 4 (edit, delete, hover)
 function attachRowEvents(row) {
 
     const editImg = row.querySelector('.edit-icon');
@@ -134,7 +134,7 @@ function attachRowEvents(row) {
 
         if (taskList.children.length === 0) {
             taskList.prepend(createInputRow()); 
-            // prepend добавляет элемент В НАЧАЛО .Если список стал пустым
+          
         }
     });
 
@@ -201,7 +201,7 @@ function attachRowEvents(row) {
 }
 
 
-// 5 КНОПКА "+" → создаёт новый input
+// 5  "+"  создаёт новый input
     plusBtn.addEventListener('click', (e) => {
      e.stopPropagation();
     //   if (e.target.id === 'plus-btn') {
@@ -224,7 +224,7 @@ function attachRowEvents(row) {
 });
 
 
-// 6 КНОПКА ADD → сохраняет input → делает задачу
+// 6  ADD сохраняет input 
 addBtn.addEventListener('click', () => {
 
     const currentInputRow = taskList.querySelector('.task-item.editing');
