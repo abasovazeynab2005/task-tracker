@@ -7,18 +7,18 @@ const sortIcon = document.getElementById('sort-icon');
 
 // 1 Объект с путями к картинкам (иконки)
 const PATHS = {
-    editGray: '../pic/edit-gray.png',
-    editPurple: '../pic/edit-purple.png',
-    deleteGray: '../pic/delete-gray.png',
-    deletePurple: '../pic/delete-purple.png',
-    plusGray: '../pic/plus-gray.png',
-    plusPurple: '../pic/plus-purple.png',
-    sortDownGray: '../pic/down-gray.png',
-    sortDown: '../pic/down.png',
-    sortUpGray: '../pic/up-gray.png',
-    sortUp: '../pic/up.png',
-    addIcon: '../pic/add.png',
-    addPurple: '../pic/add-violet1.png'
+    editGray: './pic/edit-gray.png',
+    editPurple: './pic/edit-purple.png',
+    deleteGray: './pic/delete-gray.png',
+    deletePurple: './pic/delete-purple.png',
+    plusGray: './pic/plus-gray.png',
+    plusPurple: './pic/plus-purple.png',
+    sortDownGray: './pic/down-gray.png',
+    sortDown: './pic/down.png',
+    sortUpGray: './pic/up-gray.png',
+    sortUp: './pic/up.png',
+    addIcon: './pic/add.png',
+    addPurple: './pic/add-violet1.png'
 };
 
 //  ФУНКЦИЯ: создаёт строку с input (поле ввода)
