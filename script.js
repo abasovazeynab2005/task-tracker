@@ -109,7 +109,6 @@ function sortTasks() {
         return 0;                     
     }
 });
-}
 
     // Находим строку ввода, если она есть
 const editingRow = taskList.querySelector('.task-item.editing');
@@ -124,6 +123,7 @@ taskList.innerHTML = ''; // очищаем список
  for (let i = 0; i < items.length; i++) {
      taskList.appendChild(items[i]); // остальные задачи после неё
      }
+}
 
 
 
