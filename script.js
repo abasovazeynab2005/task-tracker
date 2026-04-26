@@ -76,19 +76,28 @@ function updateSortIcon(isHover) {
 } 
 
 // 3 сортирует задачи
-function sortTasks() {
-   
-    isAscending = !isAscending;
-
     // Находим все завершённые задачи (кроме редактируемой строки)
-    const nodeList = taskList.querySelectorAll('.task-item:not(.editing)');
-    const items = [...nodeList] 
+    // const nodeList = taskList.querySelectorAll('.task-item:not(.editing)');
+    // const items = [...nodeList] 
+    function sortTasks() {
+    isAscending = !isAscending;
+    //  используем обычный массив и цикл
+    const allItems = taskList.querySelectorAll('.task-item');
+    const items = [];
+    let editingRow = null;
+
+    for (let i = 0; i < allItems.length; i++) {
+        if (allItems[i].classList.contains('editing')) {
+            editingRow = allItems[i];
+        } else {
+        items.push(allItems[i]);
+        }
+    }
 
     // Сортируем задачи по тексту
   items.sort(function(a, b) {
-    var textA = a.querySelector('.task-text').innerText.toLowerCase();
-    var textB = b.querySelector('.task-text').innerText.toLowerCase();
-
+    const textA = a.querySelector('.task-text').innerText.toLowerCase();
+    const textB = b.querySelector('.task-text').innerText.toLowerCase();
     if (isAscending) {
         if (textA < textB) return -1; 
         if (textA > textB) return 1;  
@@ -100,12 +109,9 @@ function sortTasks() {
     }
 });
 
-    // Находим строку ввода, если она есть
-const editingRow = taskList.querySelector('.task-item.editing');        
+    
+// const editingRow = taskList.querySelector('.task-item.editing');        
 taskList.innerHTML = ''; 
-
-
-
  if (editingRow) {
      taskList.appendChild(editingRow); // вставляем в конец
  }
@@ -114,35 +120,60 @@ taskList.innerHTML = '';
      }
 }
 
+//  "+"  создаёт новый input
+    plusBtn.addEventListener('click', (e) => {
+    const existing = taskList.querySelector('.task-item.editing');
+    if (existing) {
+        //  Поле уже существует
+        const input = existing.querySelector('.task-input');
+        input.focus();
+    } else {
+        //  Поля нет, создаем новое
+        const newRow = createInputRow();
+        taskList.prepend(newRow);
+
+        const input = newRow.querySelector('.task-input');
+        input.focus();
+    }
+});
 
 
-// 4 (edit, delete, hover)
-function attachRowEvents(row) {
+//  ADD сохраняет input 
+addBtn.addEventListener('click', () => {
+    const editRow = taskList.querySelector('.task-item.editing');
+    if (!editRow) return;
+    const input = editRow.querySelector('.task-input');
+    const val = input.value.trim();
+    if (val !== "") {
+        editRow.classList.remove('editing');
+        editRow.innerHTML = 
+            '<span class="task-text">' + val + '</span>' +
+            '<div class="action-icons">' +
+                '<img src="' + PATHS.editGray + '" class="edit-icon">' +
+                '<img src="' + PATHS.deleteGray + '" class="delete-icon">' +
+            '</div>';
+        makeEventsEvents(editRow);
+    }
+});
 
+//  (edit, delete, hover)
+function makeEvents(row) {
     const editImg = row.querySelector('.edit-icon');
     const deleteImg = row.querySelector('.delete-icon');
-
     editImg.addEventListener('mouseenter', () => editImg.src = PATHS.editPurple);
     editImg.addEventListener('mouseleave', () => editImg.src = PATHS.editGray);
-
     deleteImg.addEventListener('mouseenter', () => deleteImg.src = PATHS.deletePurple);
     deleteImg.addEventListener('mouseleave', () => deleteImg.src = PATHS.deleteGray);
-
     deleteImg.addEventListener('click', () => {
         row.remove(); 
-        
-
-        if (taskList.children.length === 0) {
-            taskList.prepend(createInputRow()); 
-          
-        }
+        // if (taskList.children.length === 0) {
+        //     taskList.prepend(createInputRow());  
+        // }
     });
 
     editImg.addEventListener('click', () => {
-
         const taskText = row.querySelector('.task-text');
         const currentText = taskText.innerText;
-
         const input = document.createElement('input');
         input.type = 'text';
         input.className = 'task-input';
@@ -150,14 +181,11 @@ function attachRowEvents(row) {
 
         const confirmImg = document.createElement('img');
         confirmImg.src = PATHS.addIcon;
-
          confirmImg.className = 'edit-icon confirm-edit-icon';
         confirmImg.alt = 'confirm';
-
         confirmImg.addEventListener('mouseenter', () => {
             confirmImg.src = PATHS.addPurple;
         });
-
         confirmImg.addEventListener('mouseleave', () => {
             confirmImg.src = PATHS.addIcon;
         });
@@ -182,70 +210,19 @@ function attachRowEvents(row) {
             const newSpan = document.createElement('span');
             newSpan.className = 'task-text';
             newSpan.innerText = newVal;
-
             input.replaceWith(newSpan); 
             //поле ввода заменяется обратно на обычный текст.
-
             const newEditImg = document.createElement('img');
             newEditImg.src = PATHS.editGray;
-
             newEditImg.className = 'edit-icon';
             newEditImg.alt = 'edit';
-
             confirmImg.replaceWith(newEditImg);
-            attachRowEvents(row);
+            makeEvents(row);
         }
         confirmImg.addEventListener('click', confirmEdit);
 
     });
 }
-
-
-// 5  "+"  создаёт новый input
-    plusBtn.addEventListener('click', (e) => {
-     e.stopPropagation();
-    //   if (e.target.id === 'plus-btn') {
-    //     return;}
-
-    const existing = taskList.querySelector('.task-item.editing');
-
-    if (existing) {
-        //  Поле уже существует
-        const input = existing.querySelector('.task-input');
-        input.focus();
-    } else {
-        //  Поля нет, создаем новое
-        const newRow = createInputRow();
-        taskList.prepend(newRow);
-
-        const input = newRow.querySelector('.task-input');
-        input.focus();
-    }
-});
-
-
-// 6  ADD сохраняет input 
-addBtn.addEventListener('click', () => {
-
-    const currentInputRow = taskList.querySelector('.task-item.editing');
-    if (!currentInputRow) return;
-
-    const input = currentInputRow.querySelector('.task-input');
-    const val = input.value.trim();
-
-    if (val === '') return;
-    currentInputRow.classList.remove('editing'); 
-
-    currentInputRow.innerHTML = `
-        <span class="task-text">${val}</span>
-        <div class="action-icons">
-            <img src="${PATHS.editGray}" class="edit-icon">
-            <img src="${PATHS.deleteGray}" class="delete-icon">
-        </div>
-    `;
-    attachRowEvents(currentInputRow);
-});
-
 
 // 7 SORT кнопка
 sortBtn.addEventListener('mouseenter', function() {

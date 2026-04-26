@@ -18,7 +18,7 @@ body {
      background: #fff; 
     width: 400px;
     border-radius: 12px;
-    overflow: hidden;
+    overflow: hidden; 
     border: 1px solid #ddd;
 }
 
@@ -28,15 +28,16 @@ body {
     width: 100%;
 }
 
-.content {
+ .content {
     padding: 20px;
-}
+} 
 
 h1 {
     font-size: 24px;
     margin-bottom: 15px;
     font-weight: 800;
     text-align: center;
+     padding: 10px;
 }
 
 /* Кнопка сортировки  */
@@ -46,11 +47,11 @@ h1 {
     margin-bottom: 10px;
 }
 
-.icon-btn {
+ #sort-btn {
     background: none;
     border: none;
     cursor: pointer;
-}
+} 
 
 .icon-btn img {
     width: 25px; 
@@ -78,8 +79,8 @@ h1 {
 }
 
 .task-text {
-    flex-grow: 1;
-    text-align: left;
+     flex-grow: 1; 
+     text-align: left;
     font-size: 16px;
     color: #333;
     word-break: break-all; 
