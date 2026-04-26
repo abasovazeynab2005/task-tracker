@@ -117,7 +117,7 @@ taskList.innerHTML = '';
  }
  for (let i = 0; i < items.length; i++) {
      taskList.appendChild(items[i]); // остальные задачи после неё
-     }
+     } updateSortIcon(false);
 }
 
 //  "+"  создаёт новый input
@@ -131,7 +131,6 @@ taskList.innerHTML = '';
         //  Поля нет, создаем новое
         const newRow = createInputRow();
         taskList.prepend(newRow);
-
         const input = newRow.querySelector('.task-input');
         input.focus();
     }
@@ -152,7 +151,7 @@ addBtn.addEventListener('click', () => {
                 '<img src="' + PATHS.editGray + '" class="edit-icon">' +
                 '<img src="' + PATHS.deleteGray + '" class="delete-icon">' +
             '</div>';
-        makeEventsEvents(editRow);
+        makeEvents(editRow);
     }
 });
 
@@ -166,9 +165,9 @@ function makeEvents(row) {
     deleteImg.addEventListener('mouseleave', () => deleteImg.src = PATHS.deleteGray);
     deleteImg.addEventListener('click', () => {
         row.remove(); 
-        // if (taskList.children.length === 0) {
-        //     taskList.prepend(createInputRow());  
-        // }
+         if (taskList.children.length === 0) {
+             taskList.prepend(createInputRow());  
+         }
     });
 
     editImg.addEventListener('click', () => {
